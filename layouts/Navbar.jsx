@@ -8,15 +8,21 @@ import { VscClose } from "react-icons/vsc";
 import { Button } from "../ui-components";
 import { VscChromeClose } from "react-icons/vsc";
 import api from "../services/api";
+import { FcGoogle } from "react-icons/fc";
+import { BsFacebook, BsGithub } from "react-icons/bs";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
+  const [signup, setSignup] = useState(false);
+  const [resetPass, setResetPass] = useState(false);
   const [modal, setModal] = useState(false);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [id, setId] = useState(null);
   const [clients, setClients] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -178,7 +184,7 @@ const Navbar = () => {
                 <button className="flex items-center" onClick={handleClick}>
                   <span>
                     <AiOutlineMenu fontSize={30} />
-                  </span>{" "}
+                  </span>
                 </button>
               )}
               {active && (
@@ -232,10 +238,13 @@ const Navbar = () => {
                 className="absolute top-[2%] sm:top-[-5%] right-2 sm:right-[-5%]"
               >
                 <span>
-                  <VscChromeClose fontSize={30} className="text-green sm:text-white" />
+                  <VscChromeClose
+                    fontSize={30}
+                    className="text-green sm:text-white"
+                  />
                 </span>
               </button>
-              <div className="login">
+              <div className={signup ? "login hidden" : "login"}>
                 <div className="flex flex-col">
                   <h3 className="font-bold text-primary text-lg max-w-[280px] w-full mb-4">
                     Начните совершать покупки в английских магазинах
@@ -297,15 +306,14 @@ const Navbar = () => {
                       />
                     </div>
                     <p className="font-light text-[14px] leading-5 max-w-[395px] w-full">
-                      Нажимая на кнопку вы соглашаетесь с{" "}
-                      <a href="#!" className="text-green">
-                        {" "}
+                      Нажимая на кнопку вы соглашаетесь с
+                      <a href="#!" className="text-green mx-1">
                         правилами предоставления услуг
-                      </a>{" "}
-                      и{" "}
-                      <a href="#!" className="text-green">
+                      </a>
+                      и
+                      <a href="#!" className="text-green mx-1">
                         политикой конфиденциальности
-                      </a>{" "}
+                      </a>
                     </p>
                     <div className="flex items-center flex-col sm:flex-row justify-between mt-5">
                       <button
@@ -318,7 +326,10 @@ const Navbar = () => {
                         <p className="text-primary font-regular">
                           Уже зарегистрированы?
                         </p>
-                        <button className="text-green text-base">
+                        <button
+                          onClick={() => setSignup(true)}
+                          className="text-green text-base"
+                        >
                           Выполните вход
                         </button>
                       </div>
@@ -326,6 +337,172 @@ const Navbar = () => {
                   </form>
                 </div>
               </div>
+              {signup && (
+                <div className={resetPass ? 'signup hidden' : 'signup'}>
+                  <div className="flex flex-col">
+                    <h3 className="font-bold text-primary text-lg max-w-[280px] w-full mb-4">
+                      Выполните вход в ваш личный кабинет
+                    </h3>
+                    <form
+                      action=""
+                      className="flex flex-col"
+                      onSubmit={handleSubmitForCreateAccount}
+                    >
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="username"
+                          className="font-bold text-base mb-2"
+                        >
+                          Номер телефона:
+                        </label>
+                        <input
+                          type="phone"
+                          name="username"
+                          placeholder="Введите ваш номер"
+                          className="w-full py-[10px] px-2 border border-gray bg-[#FCFDFF] outline-none rounded-[6px] focus:bg-[#d4d4d6a2]"
+                          required
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </div>
+                      <div className="flex flex-col my-4">
+                        <label
+                          htmlFor="email"
+                          className="font-bold text-base mb-2"
+                        >
+                          Email:
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="Введите ваш email:"
+                          className="w-full py-[10px] px-2 border border-gray bg-[#FCFDFF] outline-none rounded-[6px] focus:bg-[#d4d4d6a2]"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
+                      <div className="flex flex-col mb-4">
+                        <label
+                          htmlFor="password"
+                          className="font-bold text-base mb-2"
+                        >
+                          Ваш пароль:
+                        </label>
+                        <input
+                          type="text"
+                          name="password"
+                          placeholder="Введите ваш пароль:"
+                          className="w-full py-[10px] px-2 border border-gray bg-[#FCFDFF] outline-none rounded-[6px] focus:bg-[#d4d4d6a2]"
+                          required
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                      </div>
+                      <p className="font-light text-[14px] leading-5 max-w-[395px] w-full">
+                        <a
+                          onClick={() => setResetPass(true) }
+                          href="#!"
+                          className="text-green mx-1"
+                        >
+                          Восстановление пароля
+                        </a>
+                        {""}
+                        или
+                        {""}
+                        <a
+                          onClick={() => setSignup(false)}
+                          href="#!"
+                          className="text-green mx-1"
+                        >
+                          быстрая регистрация
+                        </a>
+                      </p>
+                      <div className="flex items-center flex-col sm:flex-row justify-between mt-5">
+                        <button
+                          type="submit"
+                          className="bg-green shadow-green w-[200px] p-5 rounded-lg font-bold text-white text-base"
+                        >
+                          Войти
+                        </button>
+                        <div className="flex mt-4 sm:mt-0 items-center sm:items-start justify-center">
+                          <button className="mx-3 text-green text-base">
+                            <span>
+                              <FcGoogle fontSize={25} />
+                            </span>
+                          </button>
+                          <button className="mx-3 text-blue text-base">
+                            <span>
+                              <BsFacebook fontSize={25} color="#4267B2" />
+                            </span>
+                          </button>
+                          <button className="mx-3 text-base">
+                            <span>
+                              <BsGithub fontSize={25} />
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
+              {resetPass && (
+                <div className="resetpassword">
+                  <div className="flex flex-col">
+                    <h3 className="font-bold text-primary text-lg max-w-[280px] w-full mb-4">
+                      Восстановление пароля
+                    </h3>
+                    <p className="font-light text-[16px] leading-4 max-w-[380px] w-full mb-2">
+                      Введите Email, с которым вы зарегистрированы на сайте, и
+                      нажмите{" "}
+                      <strong className="font-bold">«Восстановить»</strong>
+                    </p>
+                    <form
+                      action=""
+                      className="flex flex-col"
+                      onSubmit={handleSubmitForCreateAccount}
+                    >
+                      <div className="flex flex-col my-4">
+                        <label
+                          htmlFor="email"
+                          className="font-bold text-base mb-2"
+                        >
+                          Ваш email:
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="Введите ваш email:"
+                          className="w-full py-[10px] px-2 border border-gray bg-[#FCFDFF] outline-none rounded-[6px] focus:bg-[#d4d4d6a2]"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
+
+                      <p className="font-light text-[14px] leading-5 max-w-[395px] w-full">
+                        Вспомнили пароль?
+                        <a
+                          onClick={() => setResetPass(false)}
+                          href="#!"
+                          className="text-green mx-1"
+                        >
+                          Выполните вход
+                        </a>
+                      </p>
+                      <div className="flex items-center flex-col sm:flex-row justify-between mt-5">
+                        <button
+                          type="submit"
+                          className="bg-green shadow-green w-[200px] p-5 rounded-lg font-bold text-white text-base"
+                        >
+                          Восстановить
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
