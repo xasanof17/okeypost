@@ -13,9 +13,9 @@ const SecondAllCard = () => {
             </div>
             <div className="col-12 col-md-3 flex items-center justify-center sm:justify-end">
               <div className="flex items-center justify-center mt-4 sm:mt-0">
-                <a href='#!' className="mr-1 p-3 border-2 border-white rounded-full hover:scale-75 duration-300"><SiWhatsapp className="text-white" fontSize={28} /></a>
-                <a href='#!' className="mr-1 p-3 border-2 border-white rounded-full hover:scale-75 duration-300"><SiViber className="text-white" fontSize={28} /></a>
-                <a href='#!' className="mr-1 p-3 border-2 border-white rounded-full hover:scale-75 duration-300"><BiMessageDetail className="text-white" fontSize={28} /></a>
+                <a href='tel:+998900198505' className="mr-1 p-3 border-2 border-white rounded-full hover:scale-75 duration-300"><SiWhatsapp className="text-white" fontSize={28} /></a>
+                <a href='tel:+998900198505' className="mr-1 p-3 border-2 border-white rounded-full hover:scale-75 duration-300"><SiViber className="text-white" fontSize={28} /></a>
+                <a href='tel:+998900198505' className="mr-1 p-3 border-2 border-white rounded-full hover:scale-75 duration-300"><BiMessageDetail className="text-white" fontSize={28} /></a>
               </div>
             </div>
           </div>

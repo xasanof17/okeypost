@@ -56,7 +56,7 @@ const Shops = () => {
                         alt={card.img}
                       />
                     </div>
-                    <h4 className="font-bold text-primary text-16px leading-8">
+                    <h4 className="font-bold text-primary text-[14px] sm:text-[16px] text-center sm:text-start sm:leading-8">
                       {card.title}
                     </h4>
                   </div>
