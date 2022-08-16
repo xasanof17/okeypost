@@ -231,7 +231,7 @@ const Navbar = () => {
       <ToastContainer />
       {modal && (
         <div className="fixed top-0 left-0 w-full h-full z-[100] backdrop-blur-sm">
-          <div className="flex items-center justify-center mt-[20%] sm:mt-[25%] md:mt-[15%] lg:mt-[8%]">
+          <div className="flex items-center justify-center mt-[15%]">
             <div className="bg-white pt-[50px] xs:pt-[45px] p-[30px] sm:p-[40px] max-w-[480px] w-full rounded-sm shadow-white relative">
               <button
                 onClick={() => setModal((modal) => !modal)}
@@ -240,7 +240,7 @@ const Navbar = () => {
                 <span>
                   <VscChromeClose
                     fontSize={30}
-                    className="text-green sm:text-white"
+                    className="text-green"
                   />
                 </span>
               </button>
